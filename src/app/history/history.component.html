@@ -1,0 +1,55 @@
+<div class="container-fluid" style="margin-top: 70px;">
+      <ng-container >
+        <input style="width: 25rem;margin-left: 56rem;"
+          placeholder="Search ..."
+          type="text"
+          class="form-control"
+          [(ngModel)]="searchText"
+        /></ng-container>
+      <div class="row">
+        <div class="panel-body col-sm-10 table-responsive table-bordered" style="margin-left: auto;margin-right: auto;">
+          
+          <table class="table table-hover table-striped">
+            
+            <thead style="color: gray">
+              <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Details</th>
+                
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                *ngFor="
+                  let his of historys
+                    | pagination: pageSize:currentPage
+                    | searchFilter: searchText
+                "
+              >
+                <td>{{ his.id}}</td>
+                <td>{{ his.title }}</td>
+                <td>{{ his.details }}</td>
+                
+                
+              </tr>
+            </tbody>
+          </table>
+        </div>
+  
+        
+      </div>
+    </div>
+    <nav aria-label="Page navigation " style="margin-left: 7.3rem;">
+      <ul class="pagination">
+        <li class="page-item">
+          <a class="page-link" [ngClass]="{'active':selectedPage == page}" (click)="setPagePrev()">Previous</a>
+        </li>
+        <li *ngFor="let page of numbers" class="page-item">
+          <a class="page-link" [ngClass]="{'active':selectedPage == page}" (click)="setPage(page)">{{ page +1 }}</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" [ngClass]="{'active':selectedPage == page}" (click)="setPageNext()">Next</a>
+        </li>
+      </ul>
+    </nav>

@@ -1,0 +1,65 @@
+
+    <div class="container-fluid" style="margin-top: 70px;">
+        <ng-container >
+            <input style="width: 25rem;margin-left: 56rem;"
+              placeholder="Search ..."
+              type="text"
+              class="form-control"
+              [(ngModel)]="searchText"
+            /></ng-container>
+      <div class="row">
+        <div class="panel-body col-sm-11 table-bordered table-responsive" style="margin-left: auto;margin-right: auto;">
+          <table class="table table-hover table-striped">
+            <thead style="color: gray;position: relative;">
+              <tr>
+                <th>Payload ID</th>
+                <th>Reused</th>
+                <th>Nationality</th>
+                <th>Manufacturer</th>
+                <th>Payload Type</th>
+                <th>Payload Mass Kg</th>
+                <th>Payload Mass Lbs</th>
+                <th>Orbit</th>
+                <th>Reference System</th>
+                <th>Regime</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                *ngFor="
+                  let loads of payloads
+                    | pagination: pageSize:currentPage
+                    | searchFilter: searchText
+                "
+              >
+                <td>{{ loads.payload_id}}</td>
+                <td>{{ loads.reused }}</td>
+                <td>{{ loads.nationality }}</td>
+                <td>{{ loads.manufacturer }}</td>
+                <td>{{ loads.payload_type }}</td>
+                <td>{{ loads.payload_mass_kg }}</td>
+                <td>{{ loads.payload_mass_lbs }}</td>
+                <td>{{ loads.orbit }}</td>
+                <td>{{ loads.orbit_params.reference_system}}</td>
+                <td>{{ loads.orbit_params.regime }}</td>
+                
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  
+    <nav aria-label="Page navigation " style="margin-left: 3.7rem;">
+      <ul class="pagination">
+        <li class="page-item">
+          <a class="page-link" [ngClass]="{'active':selectedPage == page}" (click)="setPagePrev()">Previous</a>
+        </li>
+        <li *ngFor="let page of numbers" class="page-item">
+          <a class="page-link" [ngClass]="{'active':selectedPage == page}" (click)="setPage(page)">{{ page +1 }}</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" [ngClass]="{'active':selectedPage == page}" (click)="setPageNext()">Next</a>
+        </li>
+      </ul>
+    </nav>

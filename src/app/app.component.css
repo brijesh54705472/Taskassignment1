@@ -1,0 +1,17 @@
+.b {
+  background-color: #fff;
+  width: 200px;
+  height: 450px;
+  border: 1px light black;
+  overflow: scroll;
+}
+
+.c {
+  background-color: #fff;
+  width: 1150px;
+  height: 450px;
+  border: 1px light black;
+  overflow: scroll;
+  margin-left: 10px;
+  /* margin-right: auto; */
+}
